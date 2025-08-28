@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Competencias Generales</title>
+    <style>
+        body {
+            background: #181818;
+            color: #fff;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 2.2em;
+            margin-bottom: 40px;
+        }
+        .tabla-competencias {
+            margin: 0 auto;
+            border-collapse: collapse;
+            width: 900px;
+            min-width: 650px;
+            background: #222;
+        }
+        .tabla-competencias th, .tabla-competencias td {
+            border: 1px solid #bbb;
+            padding: 12px 16px;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .tabla-competencias th {
+            background: #888;
+            font-weight: bold;
+        }
+        .th-orange {
+            background: #ff9800;
+            color: #222;
+            font-weight: bold;
+        }
+        .tabla-competencias .nombre {
+            text-align: left;
+            font-weight: bold;
+        }
+        .tabla-competencias td {
+            background: #222;
+        }
+        .tabla-competencias tr td:first-child {
+            color: #fff;
+        }
+        .tabla-competencias tr td:not(:first-child) {
+            color: #fff;
+        }
+        a {
+            color: #8cf;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Competencias Generales</h1>
+    <table class="tabla-competencias">
+        <tr>
+            <th class="th-orange">ALUMNO</th>
+            <th class="th-orange">ASIGNATURA</th>
+            <th class="th-orange">PROMEDIO</th>
+            <th class="th-orange">COMPETENCIA</th>
+        </tr>
+        {% for row in competencias %}
+        <tr>
+            <td class="nombre">{{ row.nombre_alumno }}</td>
+            <td>{{ row.nombre_asignatura }}</td>
+            <td>{{ row.promedio }}</td>
+            <td>{{ row.acronimo }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <div style="text-align:center; margin-top:30px;">
+        <a href="{{ url_for('index') }}">Volver al inicio</a>
+    </div>
+</body>
+</html>

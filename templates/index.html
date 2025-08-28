@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Gestión Escolar</title>
+    <style>
+        body {
+            background: #181818;
+            color: #fff;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 2.2em;
+            margin-bottom: 40px;
+        }
+        .tabla-alumnos {
+            margin: 0 auto 0 auto;
+            border-collapse: collapse;
+            width: 450px;
+            min-width: 350px;
+            background: #222;
+        }
+        .tabla-alumnos th, .tabla-alumnos td {
+            border: 1px solid #bbb;
+            padding: 12px 16px;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .tabla-alumnos th {
+            background: #222;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .tabla-alumnos td {
+            background: #222;
+        }
+        .tabla-alumnos a {
+            color: #8cf;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .tabla-alumnos a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+        .btn-calc-ingresos, .btn-calc-competencias {
+            background:#ff9800;
+            color:#222;
+            font-weight:bold;
+            font-size:1.1em;
+            padding:12px 28px;
+            border-radius:4px;
+            text-decoration:none;
+            border:none;
+            transition:background 0.2s;
+            display: inline-block;
+            margin-bottom: 18px;
+            margin-right: 10px;
+        }
+        .btn-calc-ingresos:hover, .btn-calc-competencias:hover {
+            background: #ffa733;
+            color: #111;
+        }
+    </style>
+</head>
+<body>
+    <h1>Alumnos</h1>
+    <div style="text-align:center; margin: 32px 0;">
+        <a href="{{ url_for('calcular_indicadores') }}" class="btn-calc-ingresos">
+            Calcular y mostrar ingresos por alumno
+        </a>
+        <a href="{{ url_for('calcular_competencias_generales') }}" class="btn-calc-competencias">
+            Calcular y mostrar competencias generales
+        </a>
+    </div>
+    <table class="tabla-alumnos">
+        <tr>
+            <th>Nombre completo</th>
+        </tr>
+        {% for alumno in alumnos %}
+        <tr>
+            <td>
+                <a href="{{ url_for('alumno_detalle', alumno_id=alumno['id_alumno']) }}">
+                    {{ alumno['nombre'] }} {{ alumno['apellido_paterno'] }} {{ alumno['apellido_materno'] }}
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Detalle de Alumno</title>
+    <style>
+        body {
+            background: #181818;
+            color: #fff;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 2.2em;
+            margin-bottom: 40px;
+        }
+        .datos-alumno {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto 30px auto;
+            font-size: 1.15em;
+        }
+        .bloque-materia {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 32px;
+        }
+        .tabla-materia {
+            border-collapse: collapse;
+            width: 450px;
+            min-width: 350px;
+            background: #222;
+            margin: 0 auto;
+        }
+        .tabla-materia th, .tabla-materia td {
+            border: 1px solid #bbb;
+            padding: 12px 16px;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .tabla-materia th {
+            background: #222;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .tabla-materia td {
+            background: #222;
+        }
+        a {
+            color: #8cf;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Detalle de Alumno</h1>
+    <div class="datos-alumno">
+        <strong>Nombre:</strong> {{ alumno['nombre'] }}<br>
+        <strong>Apellido paterno:</strong> {{ alumno['apellido_paterno'] }}<br>
+        <strong>Apellido materno:</strong> {{ alumno['apellido_materno'] }}
+    </div>
+    {% for materia in materias %}
+    <div class="bloque-materia">
+    <table class="tabla-materia">
+        <tr>
+            <th>Asignatura</th>
+            <th colspan="{{ materia.unidades|length }}">{{ materia.descripcion }}</th>
+        </tr>
+        <tr>
+            <td>Unidad</td>
+            {% for u in materia.unidades %}
+                <td>{{ u }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Calificación</td>
+            {% for u in materia.unidades %}
+                <td>{{ materia.califs_por_unidad.get(u, "") }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Promedio General</td>
+            <td colspan="{{ materia.unidades|length }}">
+                {% if materia.promedio_general is not none %}
+                    {{ materia.promedio_general }}
+                {% else %}
+                    N/A
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+    </div>
+    {% endfor %}
+    <div style="text-align:center;">
+        <a href="{{ url_for('index') }}">Volver al listado de alumnos</a>
+    </div>
+</body>
+</html>
